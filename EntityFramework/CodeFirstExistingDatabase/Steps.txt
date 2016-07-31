@@ -1,0 +1,9 @@
+﻿01. Enable migrations in Package Manager Console
+
+enable-migrations
+
+02. Create firt migration
+
+For the first migration we have to use -IgnoreChanges
+
+add-migration InitialModel -IgnoreChanges -Force
