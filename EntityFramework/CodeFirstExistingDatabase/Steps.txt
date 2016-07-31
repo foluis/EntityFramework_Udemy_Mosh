@@ -7,3 +7,8 @@ enable-migrations
 For the first migration we have to use -IgnoreChanges
 
 add-migration InitialModel -IgnoreChanges -Force
+
+
+03. Downgrading Database (Go back to specific migration)
+
+update-database	-TargetMigration:Name_Of_Migration
