@@ -1,0 +1,42 @@
+﻿00. Make sure EtityFramework is installed
+
+01. Create Model
+
+Create aplication classes
+
+02. Create Data context
+
+Create context with its DbSets
+Change name of ConnectionString Name if it is necesary
+
+public class PlutoContext : DbContext
+{
+	public PlutoContext()
+	: base("name=DefaultConnection")
+    {}
+
+	DbSet<Course> Courses { get; set; }
+
+	DbSet<Author> Authors { get; set; }
+
+	DbSet<Tag> Tags { get; set; }
+}  
+
+03. Create connection string in config file
+
+  <connectionStrings>
+    <add name="DefaultConnection" connectionString="data source=FCXLFFOREROG\SqlServer2012; initial catalog=PlutoCodeFirst; integrated security=SSPI" providerName="System.Data.SqlClient" />
+  </connectionStrings>
+
+04. Enable migrations in Package Manager Console
+
+enable-migrations
+
+05. Create firt migration
+
+add-migration
+
+06. Update Database with migration
+
+update-databas
+
