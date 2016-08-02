@@ -1,0 +1,97 @@
+Data Anotations 
+
+/*******************************************/
+Tables Names
+
+Convention 
+Table name = Plural from Class Name
+Schema = dbo
+
+[Table("tbl_course")]
+Public class Course
+
+[Table("tbl_course", Schema = "catalog")]
+Public class Course
+
+/*******************************************/
+Column Names
+
+Convention
+Column name = same as propertie
+Some default types
+
+[Column("sName")]
+public string Name { get; set; }
+
+[Column("sName", TypeName="varchar")]
+public string Name { get; set; }
+
+/*******************************************/
+Primary Key
+
+Convention
+A property named ID or [ClassName]Id [propertyName]Id ???
+
+//None, Identity, Computed
+
+[Key]
+[DatabaseGenerated(DatabaseGeneratedOption.None)]
+public string ISBN { get; set; }
+
+/*******************************************/
+Composite Keys
+
+Public class OrderItem
+{
+	[Key]
+	[Column(Order = 1)]
+	public int OrderId { get; set; }
+
+	[Key]
+	[Column(Order = 2)]
+	public int OrderItemId { get; set; }
+}
+
+/*******************************************/
+Nulls
+
+Conventions
+A Column is nullable if property is nullable
+
+[Required]
+public string Name { get; set; }
+
+/*******************************************/
+Length of strings
+
+Conventions
+Type max legnth
+
+[MaxLength(200)]
+public string Name { get; set; }
+
+/*******************************************/
+Index
+
+[Index(IsUnique = true)]
+public string Name { get; set; }
+
+[Index(IsUnique = true)]
+public string Name { get; set; }
+--------------------------------------------
+[Index("IX_AuthorStudentsCount",1)]
+public int AuthorId { get; set; }
+
+[Index("IX_AuthorStudentsCount",2)]
+public int StudentsCount { get; set; }
+
+/*******************************************/
+Foregng Keys
+
+Public class Course
+{		
+	public int AuthorId { get; set; }
+
+	[ForeignKey("AuthorId")]
+	public Author Author { get; set; }
+}

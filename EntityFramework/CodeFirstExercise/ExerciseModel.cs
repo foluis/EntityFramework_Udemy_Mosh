@@ -24,7 +24,19 @@ namespace CodeFirstExercise
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
         public virtual DbSet<Video> Videos { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
+
+        //Fluent API
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Video>()
+                .Property(v => v.Name)
+                .IsRequired()
+                .HasMaxLength(250);
+            base.OnModelCreating(modelBuilder);
+        }
     }
+
+   
 
     public class Video
     {

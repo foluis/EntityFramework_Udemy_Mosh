@@ -8,3 +8,8 @@ update-database	-TargetMigration:Name_Of_Migration
 
 update-database -script -sourceMigration:0
 update-database -script -sourceMigration:Migr1 -targetMigration:Migr2
+
+/********************************************************************/
+
+Data Anotations - Fluent API
+

@@ -1,0 +1,221 @@
+Override OnModelCreating Method in DbContext Class
+
+protected override void OnModelCreating(DbModelBuilder modelBuilder)
+{
+	//Configurations here
+
+	 base.OnModelCreating(modelBuilder);
+}
+
+--Rename Table and change schema
+protected override void OnModelCreating(DbModelBuilder modelBuilder)
+{
+	modelBuilder.Entity<Course>()
+				.ToTable("tbl_Course","catalog");
+}
+
+--Primary key
+protected override void OnModelCreating(DbModelBuilder modelBuilder)
+{
+	modelBuilder.Entity<Book>()
+				.HasKey(b => b.ISBN);
+}
+
+--Primary Compositive key
+protected override void OnModelCreating(DbModelBuilder modelBuilder)
+{
+	modelBuilder.Entity<OrderItem>()
+				.HasKey(oi => new {oi.OrderId,oi.OrderItemId});
+}
+
+--Column Names
+protected override void OnModelCreating(DbModelBuilder modelBuilder)
+{
+	modelBuilder.Entity<Course>()
+				.Property(c => c.Name)
+				.HasColumnName("sName");
+}
+
+--Column Types
+protected override void OnModelCreating(DbModelBuilder modelBuilder)
+{
+	modelBuilder.Entity<Course>()
+				.Property(c => c.Name)
+				.HasColumnType("varchar");
+}
+
+--Column Order
+protected override void OnModelCreating(DbModelBuilder modelBuilder)
+{
+	modelBuilder.Entity<Course>()
+				.Property(c => c.Name)
+				.HasColumnOrder(2);
+}
+
+--Turn off Identity
+protected override void OnModelCreating(DbModelBuilder modelBuilder)
+{
+	modelBuilder.Entity<Book>()
+				.Property(b => b.ISBN)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+}
+
+--Nulls / Not nullabe
+protected override void OnModelCreating(DbModelBuilder modelBuilder)
+{
+	modelBuilder.Entity<Course>()
+				.Property(c => c.Name)
+				.Required();
+}
+
+--Length of strings
+protected override void OnModelCreating(DbModelBuilder modelBuilder)
+{
+	modelBuilder.Entity<Course>()
+				.Property(c => c.Name)
+				.HasMaxLength(255); 
+
+	modelBuilder.Entity<Course>()
+				.Property(c => c.Description)
+				.IsMaxLength();   // ->  Set max length (MAX)
+}
+
+--Turn off cascade delete
+protected override void OnModelCreating(DbModelBuilder modelBuilder)
+{
+	modelBuilder.Entity<Course>()
+				.WillCascadeOnDelete(false);
+}
+
+
+/****************************************************/
+Relationships
+
+Entity Type1 ----> Entity Type2
+
+HasMany();		If Type1 has meny relations with type2
+HasRequired();	If Type one has only one object of type 2
+HasOptional();	If type1 has 0 or 1 object of type 2
+
+Entity Type1 <---- Entity Type2
+
+WithMany();								If Type1 has meny relations with type2
+WithRequired(); //WithRequiredPrincipal	If Type one has only one object of type 2
+				//WithRequiredDependent
+WithOptional();							If type1 has 0 or 1 object of type 2
+
+Examples
+---------------------------------------------------------------------------------
+One to Many
+Author 1--------* Course
+
+Step 1  -------->
+Step 2  <--------
+
+modelBuilder
+	.Entity<Author>()
+	.HasMany(a => a.Courses)		---Step1
+	.WithRequired(c => c.Author)	---Step2
+	.HasForeingKey(c => c.AuthorId)	---Optional, if not used foreingKey would  be Author_Id
+
+---------------------------------------------------------------------------------
+Many to Many
+Course *--------* Tag
+
+Step 1  -------->
+Step 2  <--------
+
+modelBuilder
+	.Entity<Course>()
+	.HasMany(c => c.Tag)				---Step1
+	.WithMany(t => t.Course)			---Step2
+	.Map(m => 
+	{
+		m.ToTable("CourseTags");		---Optional, change the name of the Relational Table
+		m.MapLeftKey("CourseId");		---Optional, Nombre de la columna1 de la tabla relacional
+		m.MapRightKey("TagId");			---Optional, Nombre de la columna2 de la tabla relacional
+	});
+
+---------------------------------------------------------------------------------
+One To Cero/One
+Course 1--------0..1 Caption
+
+Step 1  -------->
+Step 2  <--------
+
+modelBuilder
+	.Entity<Course>()
+	.HasOptional(c => c.Caption)	---Step1
+	.WithRequired(ca => ca.Course)	---Step2
+
+---------------------------------------------------------------------------------
+One To One
+
+Una de las dos entidades es la principal (la padre). La entidad principal puede existir sin la otra
+La entidad dependiente puede crearce despues de la principal, y no puede existir sin la principal
+
+Principal		Dependent
+Course 1--------1 Cover
+
+Step 1  -------->
+Step 2  <--------
+
+modelBuilder
+	.Entity<Course>()
+	.HasRequired(c => c.Cover)				---Step1
+	.WithRequiredPrincipal(co => co.Course)	---Step2
+
+--.......................................
+
+One To One (Al reves)
+Course 1--------1 Cover
+
+Step 1  <--------
+Step 2  -------->
+
+modelBuilder
+	.Entity<Course>()
+	.HasRequired(co => co.Course)			---Step1
+	.WithRequiredDependent(c => c.Cover)	---Step2
+
+/****************************************************/
+Organizing Fluent API configuracions Seccion 5 - Clase 42
+
+Create a class for each Entity configuracion
+
+01. Create a new Folder "EntityConfigurations"
+02. For each entity create e new Class EntityConfiguracion 
+	Ex. CourseConfiguracion.cs
+03. Order configuration classes
+	Table Naming -> ToTable
+	Primary Keys -> HasKey()
+	Properties -> Property //In alphabetical order
+	Relationships - Has... //In alphabetical order
+04. Reference Configurations classes
+	On the configuration model in the OnModelCreating method
+
+	protected override void OnModelCreating(DbModelBuilder modelBuilder)
+	{
+		modelBuilder.Configurations.Add(new CourseConfiguration());
+	}
+
+using System.Data.Entity.ModelConfiguration;
+public class CourseConfiguration : EntityTypeConfiguration<Course>
+{
+	public CourseConfiguration()
+	{
+		//Put here all the configurations
+		//Without modelBulder.Entity method
+
+		//before
+		//modelBuilder.Entity<Course>()
+		//.Property(c => c.Name)
+		//.HasColumnName("sName");		
+
+		//base.OnModelCreating(modelBuilder);
+
+		//New
+		Property(c => c.Name)
+		.HasColumnName("sName");		
+	}
+}
