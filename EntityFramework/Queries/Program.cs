@@ -8,16 +8,43 @@ namespace Queries
     {
         static void Main(string[] args)
         {
+            //Section 8
+            ChangeTracker();
             //Section 7
-            ExplicitLoading();
-            EagerLoading();
-            LazyLoading();
+            //ExplicitLoading();
+            //EagerLoading();
+            //LazyLoading();
             //SEction 6
             //Class_51_DeferredExecution();
             //Class_50();
             //Class_49_LinqExtensionMethods();
             //Class_48();
 
+        }
+
+        private static void ChangeTracker()
+        {
+            var context = new PlutoContext();
+
+            //Add an Object
+            context.Authors.Add(new Author {Name = "Luis Forero G" });
+
+            //Update an Object
+            var author = context.Authors.Find(3);
+            author.Name = "Update";
+
+            //Remove an object
+            var another = context.Authors.Find(4);
+            context.Authors.Remove(another);
+
+            //var entries = context.ChangeTracker.Entries<Author>();
+            var entries = context.ChangeTracker.Entries();
+
+            foreach (var entry in entries)
+            {
+                //string name = entry.CurrentValues["name"];
+                Console.WriteLine(entry.State);
+            }
         }
 
         private static void ExplicitLoading()

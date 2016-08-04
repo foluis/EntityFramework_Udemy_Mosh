@@ -1,4 +1,7 @@
-﻿enable-migrations
+﻿install-package entityframework 
+install-package entityframework -version 6.1.3
+
+enable-migrations
 
 add-migration MigrationName
 add-migration MigrationName -IgnoreChanges -Force
@@ -22,3 +25,21 @@ Quering Data
 Loading related objects
 
 Lazy Loading
+
+/********************************************************************/
+
+Change tracker, ver Seccion 6 -> queries
+
+/********************************************************************/
+
+LinqPad
+
+/*******/
+
+Implementing Repository --> Section 9 - Clase 73
+
+/********************************************************************/
+
+Structuring code --> Section 9 - Clase 74
+
+Structuring code ASP.NET MVC --> Section 9 - Clase 75

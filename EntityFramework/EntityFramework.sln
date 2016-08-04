@@ -15,6 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeFirstExercise", "CodeFi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9299B017-B606-497C-A015-0A3373F7AB63}"
 	ProjectSection(SolutionItems) = preProject
+		ChangeTracker.txt = ChangeTracker.txt
 		Commun Migration Commands.txt = Commun Migration Commands.txt
 		DataAnotations.txt = DataAnotations.txt
 		Fluent API.txt = Fluent API.txt
