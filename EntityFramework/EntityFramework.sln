@@ -31,6 +31,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Section7", "Section7", "{48
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadingRelatedObjects", "LoadingRelatedObjects\LoadingRelatedObjects.csproj", "{75D792DF-EF8A-451E-9ECA-2646A230909D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Section8Tracker", "Section8Tracker", "{D9ADE6F3-ED05-4D3B-BD62-7643D377A7B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChangeTracker", "ChangeTracker\ChangeTracker.csproj", "{C4F6D265-7AC4-457B-BE26-7DF3928C48E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +69,10 @@ Global
 		{75D792DF-EF8A-451E-9ECA-2646A230909D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75D792DF-EF8A-451E-9ECA-2646A230909D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75D792DF-EF8A-451E-9ECA-2646A230909D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4F6D265-7AC4-457B-BE26-7DF3928C48E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4F6D265-7AC4-457B-BE26-7DF3928C48E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4F6D265-7AC4-457B-BE26-7DF3928C48E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4F6D265-7AC4-457B-BE26-7DF3928C48E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,5 +80,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D1776DED-C59A-4F8A-8C31-96EAE15BDF5A} = {D5A52880-DB97-4626-B1B6-62B0B85B2C20}
 		{75D792DF-EF8A-451E-9ECA-2646A230909D} = {4882A07C-BABD-4631-8431-297CA61D5124}
+		{C4F6D265-7AC4-457B-BE26-7DF3928C48E5} = {D9ADE6F3-ED05-4D3B-BD62-7643D377A7B8}
 	EndGlobalSection
 EndGlobal
