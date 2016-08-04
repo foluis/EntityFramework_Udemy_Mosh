@@ -13,3 +13,12 @@ update-database -script -sourceMigration:Migr1 -targetMigration:Migr2
 
 Data Anotations - Fluent API
 
+/********************************************************************/
+
+Quering Data
+
+/********************************************************************/
+
+Loading related objects
+
+Lazy Loading

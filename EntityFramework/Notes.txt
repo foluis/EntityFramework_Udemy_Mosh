@@ -1,0 +1,5 @@
+Write queries
+
+LINQ syntax and Extension Metods
+
+
